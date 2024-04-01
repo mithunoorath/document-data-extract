@@ -9,6 +9,12 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.amazonaws.ClientConfiguration;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.util.CredentialUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.tools.imageio.ImageIOUtil;
@@ -25,6 +31,11 @@ import com.mi.ai.solutions.model.ImageType;
 import com.mi.ai.solutions.model.TextLine;
 
 import lombok.extern.slf4j.Slf4j;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.AwsCredentials;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+
 @Service
 @Slf4j
 public class DataExtractionServiceImpl implements DataExtractionService {
@@ -32,7 +43,15 @@ public class DataExtractionServiceImpl implements DataExtractionService {
     @Override
     public List<TextLine> extractDataFromBuffer(ByteBuffer byteBuffer) {
 
-        AmazonTextract client = AmazonTextractClientBuilder.defaultClient();
+        AmazonTextract client = AmazonTextractClientBuilder
+//                .defaultClient();
+                .standard()
+                .withRegion(Regions.US_EAST_1)
+//                .withClientConfiguration(new ProfileCredentialsProvider().getCredentials())
+                .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials("xxx", "xxxxx")))
+
+//                .withRegion(Region.US_EAST_1.toString())
+                .build();
         DetectDocumentTextRequest request = new DetectDocumentTextRequest()
                 .withDocument(new Document()
                         .withBytes(byteBuffer));

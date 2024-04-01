@@ -18,8 +18,8 @@ import dev.langchain4j.chain.ConversationalRetrievalChain;
 @RequestMapping("/aidocs")
 public class MainController {
 
-    @Autowired
-    private ConversationalRetrievalChain conversationalRetrievalChain;
+//    @Autowired
+//    private ConversationalRetrievalChain conversationalRetrievalChain;
 
     @Autowired
     private ConversationalRetrievalChain conversationalRetrievalChainAws;

@@ -22,7 +22,7 @@ public class DocumentDataExtractApplication {
 
 	@Autowired
 	private DataExtractionService dataExtractionService;
-private final EmbeddingStoreIngestor embeddingStoreIngestor;
+    private final EmbeddingStoreIngestor embeddingStoreIngestor;
 
     public DocumentDataExtractApplication(EmbeddingStoreIngestor embeddingStoreIngestor) {
         this.embeddingStoreIngestor = embeddingStoreIngestor;
@@ -30,12 +30,13 @@ private final EmbeddingStoreIngestor embeddingStoreIngestor;
 
     @PostConstruct
     public void init() throws IOException {
-		dataExtractionService.process("/Users/mithunoorath/Documents/Workspace/experiments/document-data-extract/src/main/resources/pdfs/labcorp-form1.pdf", "/Users/mithunoorath/Documents/Workspace/experiments/document-data-extract/src/main/resources/pdfs/searchablePdfs/labcorp-form1-mod.pdf");
-		dataExtractionService.process("/Users/mithunoorath/Documents/Workspace/experiments/document-data-extract/src/main/resources/pdfs/labcorp-form3.pdf", "/Users/mithunoorath/Documents/Workspace/experiments/document-data-extract/src/main/resources/pdfs/searchablePdfs/labcorp-form3-mod.pdf");
-		dataExtractionService.process("/Users/mithunoorath/Documents/Workspace/experiments/document-data-extract/src/main/resources/pdfs/labcorp-form4.pdf", "/Users/mithunoorath/Documents/Workspace/experiments/document-data-extract/src/main/resources/pdfs/searchablePdfs/labcorp-form4-mod.pdf");
+//		dataExtractionService.process("C:\\workspace\\Innovation\\document-data-extract\\src\\main\\resources\\pdfs\\Real1.pdf", "C:\\workspace\\Innovation\\document-data-extract\\src\\main\\resources\\pdfs\\searchablePdfs\\Real1-mod.pdf");
+//		dataExtractionService.process("C:\\workspace\\Innovation\\document-data-extract\\src\\main\\resources\\pdfs\\labcorp-form3.pdf", "C:\\workspace\\Innovation\\document-data-extract\\src\\main\\resources\\pdfs\\searchablePdfs\\labcorp-form3-mod.pdf");
+//		dataExtractionService.process("C:\\workspace\\Innovation\\document-data-extract\\src\\main\\resources\\pdfs\\labcorp-form4.pdf", "C:\\workspace\\Innovation\\document-data-extract\\src\\main\\resources\\pdfs\\searchablePdfs\\labcorp-form4-mod.pdf");
+//
+//
 
-
-        List<Document> documents = loadDocuments("/Users/mithunoorath/Documents/Workspace/experiments/document-data-extract/src/main/resources/pdfs/searchablePdfs/", new ApachePdfBoxDocumentParser());
+        List<Document> documents = loadDocuments("C:\\workspace\\Innovation\\document-data-extract\\src\\main\\resources\\pdfs\\searchablePdfs", new ApachePdfBoxDocumentParser());
         embeddingStoreIngestor.ingest(documents);
     }
 	public static void main(String[] args) {
